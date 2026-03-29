@@ -31,6 +31,13 @@
 5. Скачиваем и устанавливаем [Karabiner-Elements](https://karabiner-elements.pqrs.org)
 6. В `Karabiner-Elements → Complex Modifications` нажимаем `Add your own rule`
 7. Вставляем туда содержимое `karabiner-caps-script.json` и сохраняем
+8. По желанию отключаем системный пузырёк-индикатор языка, чтобы он не отвлекал:
+
+```sh
+defaults write kCFPreferencesAnyApplication TSMLanguageIndicatorEnabled -bool false
+```
+
+Этот пузырёк часто показывает неверный язык, поэтому пользы от него меньше, чем визуального шума.
 
 ### Пояснения
 
