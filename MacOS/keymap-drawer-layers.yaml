@@ -1,10 +1,12 @@
+_g: &g {t: '', type: ghost}
+
 layers:
   Main:
     - &func_row [Esc, F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12]
     - &symbol_row ['`', '!', '@', '#', '_', ':', ';', '"', '?', '*', '+', '-', '=', '⌫']
-    - &base_tab_row [Tab, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, '|']
-    - &caps ['.', {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, Enter]
-    - &shift [',', {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, '/', '\']
+    - &base_tab_row [Tab, *g, *g, *g, *g, *g, *g, *g, *g, *g, *g, *g, *g, '|']
+    - &caps ['.', *g, *g, *g, *g, *g, *g, *g, *g, *g, *g, *g, Enter]
+    - &shift [',', *g, *g, *g, *g, *g, *g, *g, *g, *g, '/', '\']
     - &bottom_row [⌘, ⌃, ⌥, Shift, Space, Nav, Lang]
 
   Shift:
@@ -26,12 +28,43 @@ layers:
     - *base_tab_row
     - *caps
     - *shift
-    - &bottom_row_shit [⌘, ⌃, ⌥, {t: Shift, type: held}, Space, Nav, Lang]
+    - [⌘, ⌃, ⌥, {t: Shift, type: held}, Space, Nav, Lang]
   
   Nav:
     - *func_row
     - *symbol_row
-    - &nav_tab_row [Tab, ^, '&', '[', ']', '₽', {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, '|']
-    - &nav_caps_row ['.', '<', '>', '(', ')', '$', {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, Enter]
-    - &nav_shift_row [',', '~', {t: '', type: ghost}, '{', '}', '%', {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, '/', '\']
-    - *bottom_row
+    - [
+        Tab,
+        {t: '^', type: held},
+        {t: '&', type: held},
+        {t: '[', type: held},
+        {t: ']', type: held},
+        {t: '₽', type: held},
+        *g, *g,
+        {t: '↑', type: held},
+        *g, *g, *g, *g, '|'
+      ]
+    - [
+        '.',
+        {t: '<', type: held},
+        {t: '>', type: held},
+        {t: '(', type: held},
+        {t: ')', type: held},
+        {t: '$', type: held},
+        {t: 'Home', type: held},
+        {t: '←', type: held},
+        {t: '↓', type: held},
+        {t: '→', type: held},
+        {t: 'End', type: held},
+        *g, Enter
+      ]
+    - [
+        ',',
+        {t: '~', type: held},
+        *g,
+        {t: '{', type: held},
+        {t: '}', type: held},
+        {t: '%', type: held},
+        *g, *g, *g, *g, '/', '\'
+      ]
+    - [⌘, ⌃, ⌥, Shift, Space, {t: Nav, type: held}, Lang]
