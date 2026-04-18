@@ -1,0 +1,37 @@
+layers:
+  Main:
+    - &func_row [Esc, F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12]
+    - &symbol_row ['`', '!', '@', '#', '_', ':', ';', '"', '?', '*', '+', '-', '=', '⌫']
+    - &base_tab_row [Tab, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, '|']
+    - &caps ['.', {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, Enter]
+    - &shift [',', {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, '/', '\']
+    - &bottom_row [⌘, ⌃, ⌥, Shift, Space, Nav, Lang]
+
+  Shift:
+    - *func_row
+    - [
+        '`',
+        {t: '1', type: held},
+        {t: '2', type: held},
+        {t: '3', type: held},
+        {t: '4', type: held},
+        {t: '5', type: held},
+        {t: '6', type: held},
+        {t: '7', type: held},
+        {t: '8', type: held},
+        {t: '9', type: held},
+        {t: '0', type: held},
+        '-', '=', '⌫'
+      ]
+    - *base_tab_row
+    - *caps
+    - *shift
+    - &bottom_row_shit [⌘, ⌃, ⌥, {t: Shift, type: held}, Space, Nav, Lang]
+  
+  Nav:
+    - *func_row
+    - *symbol_row
+    - &nav_tab_row [Tab, ^, '&', '[', ']', '₽', {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, '|']
+    - &nav_caps_row ['.', '<', '>', '(', ')', '$', {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, Enter]
+    - &nav_shift_row [',', '~', {t: '', type: ghost}, '{', '}', '%', {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, {t: '', type: ghost}, '/', '\']
+    - *bottom_row

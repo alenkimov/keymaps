@@ -1,0 +1,50 @@
+{
+    "description": "Right Option = Lang switcher: English (C) / Russian (C)",
+    "manipulators": [
+        {
+            "conditions": [
+                {
+                    "input_sources": [{ "input_source_id": "^org\\.sil\\.ukelele\\.keyboardlayout\\.unsavedukeleledocument2\\.english\\(c\\)$" }],
+                    "type": "input_source_if"
+                }
+            ],
+            "from": {
+                "key_code": "right_option",
+                "modifiers": { "optional": ["any"] }
+            },
+            "to": [{ "select_input_source": { "input_source_id": "^org\\.sil\\.ukelele\\.keyboardlayout\\.unsavedukeleledocument2\\.russian\\(c\\)$" } }],
+            "type": "basic"
+        },
+        {
+            "conditions": [
+                {
+                    "input_sources": [{ "input_source_id": "^org\\.sil\\.ukelele\\.keyboardlayout\\.unsavedukeleledocument2\\.russian\\(c\\)$" }],
+                    "type": "input_source_if"
+                }
+            ],
+            "from": {
+                "key_code": "right_option",
+                "modifiers": { "optional": ["any"] }
+            },
+            "to": [{ "select_input_source": { "input_source_id": "^org\\.sil\\.ukelele\\.keyboardlayout\\.unsavedukeleledocument2\\.english\\(c\\)$" } }],
+            "type": "basic"
+        },
+        {
+            "conditions": [
+                {
+                    "input_sources": [
+                        { "input_source_id": "^org\\.sil\\.ukelele\\.keyboardlayout\\.unsavedukeleledocument2\\.english\\(c\\)$" },
+                        { "input_source_id": "^org\\.sil\\.ukelele\\.keyboardlayout\\.unsavedukeleledocument2\\.russian\\(c\\)$" }
+                    ],
+                    "type": "input_source_unless"
+                }
+            ],
+            "from": {
+                "key_code": "right_option",
+                "modifiers": { "optional": ["any"] }
+            },
+            "to": [{ "select_input_source": { "input_source_id": "^org\\.sil\\.ukelele\\.keyboardlayout\\.unsavedukeleledocument2\\.english\\(c\\)$" } }],
+            "type": "basic"
+        }
+    ]
+}

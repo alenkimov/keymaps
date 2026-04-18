@@ -1,8 +1,8 @@
 <?xml version="1.1" encoding="UTF-8"?>
 <!DOCTYPE keyboard SYSTEM "file://localhost/System/Library/DTDs/KeyboardLayout.dtd">
 <!--Created by Ukelele version 457 on 2026-03-20 at 14:29 (GMT+7)-->
-<!--Last edited by Ukelele version 457 on 2026-03-22 at 19:47 (GMT+7)-->
-<keyboard group="126" id="-6558" name="Russian (C)" maxout="1">
+<!--Last edited by Ukelele version 457 on 2026-04-18 at 10:40 (GMT+7)-->
+<keyboard group="126" id="-28524" name="Russian (C)" maxout="1">
     <layouts>
         <layout first="0" last="17" mapSet="ANSI" modifiers="Modifiers"/>
         <layout first="18" last="18" mapSet="JIS" modifiers="Modifiers"/>
@@ -23,10 +23,12 @@
             <modifier keys="anyShift anyOption? command? anyControl?"/>
         </keyMapSelect>
         <keyMapSelect mapIndex="2">
-            <modifier keys="anyShift? caps? anyOption command? anyControl?"/>
+            <modifier keys="caps anyOption? command? anyControl?"/>
         </keyMapSelect>
         <keyMapSelect mapIndex="3">
-            <modifier keys="anyShift? caps? anyOption? command anyControl?"/>
+            <modifier keys="anyShift? anyOption? command anyControl?"/>
+            <modifier keys="anyShift? anyOption? command? anyControl"/>
+            <modifier keys="anyShift? anyOption command? anyControl?"/>
         </keyMapSelect>
     </modifierMap>
     <keyMapSet id="ANSI">
@@ -49,18 +51,18 @@
             <key code="15" output="к"/>
             <key code="16" output="н"/>
             <key code="17" output="е"/>
-            <key code="18" output="1"/>
-            <key code="19" output="2"/>
-            <key code="20" output="3"/>
-            <key code="21" output="4"/>
-            <key code="22" output="6"/>
-            <key code="23" output="5"/>
+            <key code="18" output="!"/>
+            <key code="19" output="@"/>
+            <key code="20" output="#"/>
+            <key code="21" output="_"/>
+            <key code="22" output=";"/>
+            <key code="23" output=":"/>
             <key code="24" output="="/>
-            <key code="25" output="9"/>
-            <key code="26" output="7"/>
+            <key code="25" output="*"/>
+            <key code="26" output="&#x0022;"/>
             <key code="27" output="-"/>
-            <key code="28" output="8"/>
-            <key code="29" output="0"/>
+            <key code="28" output="?"/>
+            <key code="29" output="+"/>
             <key code="30" output="ъ"/>
             <key code="31" output="щ"/>
             <key code="32" output="г"/>
@@ -73,7 +75,7 @@
             <key code="39" output="э"/>
             <key code="40" output="л"/>
             <key code="41" output="ж"/>
-            <key code="42" output="\"/>
+            <key code="42" output="|"/>
             <key code="43" output="б"/>
             <key code="44" output="/"/>
             <key code="45" output="т"/>
@@ -155,18 +157,18 @@
             <key code="15" output="К"/>
             <key code="16" output="Н"/>
             <key code="17" output="Е"/>
-            <key code="18" output="!"/>
-            <key code="19" output="@"/>
-            <key code="20" output="#"/>
-            <key code="21" output="$"/>
-            <key code="22" output="^"/>
-            <key code="23" output="%"/>
-            <key code="24" output="+"/>
-            <key code="25" output="("/>
-            <key code="26" output="&#x0026;"/>
-            <key code="27" output="_"/>
-            <key code="28" output="*"/>
-            <key code="29" output=")"/>
+            <key code="18" output="1"/>
+            <key code="19" output="2"/>
+            <key code="20" output="3"/>
+            <key code="21" output="4"/>
+            <key code="22" output="6"/>
+            <key code="23" output="5"/>
+            <key code="24" output="="/>
+            <key code="25" output="9"/>
+            <key code="26" output="7"/>
+            <key code="27" output="-"/>
+            <key code="28" output="8"/>
+            <key code="29" output="0"/>
             <key code="30" output="Ъ"/>
             <key code="31" output="Щ"/>
             <key code="32" output="Г"/>
@@ -181,13 +183,13 @@
             <key code="41" output="Ж"/>
             <key code="42" output="|"/>
             <key code="43" output="Б"/>
-            <key code="44" output="?"/>
+            <key code="44" output="/"/>
             <key code="45" output="Т"/>
             <key code="46" output="Ь"/>
             <key code="47" output="Ю"/>
             <key code="48" output="&#x0009;"/>
             <key code="49" output=" "/>
-            <key code="50" output="~"/>
+            <key code="50" output="`"/>
             <key code="51" output="&#x0008;"/>
             <key code="53" output="&#x001B;"/>
             <key code="64" output="&#x0010;"/>
@@ -243,57 +245,57 @@
             <key code="126" output="&#x001E;"/>
         </keyMap>
         <keyMap index="2">
-            <key code="0" output="a"/>
-            <key code="1" output="s"/>
-            <key code="2" output="d"/>
-            <key code="3" output=""/>
+            <key code="0" output="&#x003C;"/>
+            <key code="1" output="&#x003E;"/>
+            <key code="2" output="("/>
+            <key code="3" output=")"/>
             <key code="4" output=""/>
-            <key code="5" output=""/>
-            <key code="6" output="z"/>
-            <key code="7" output="x"/>
-            <key code="8" output="c"/>
-            <key code="9" output=""/>
+            <key code="5" output="$"/>
+            <key code="6" output="~"/>
+            <key code="7" output=""/>
+            <key code="8" output="{"/>
+            <key code="9" output="}"/>
             <key code="10" output=""/>
-            <key code="11" output=""/>
-            <key code="12" output="q"/>
-            <key code="13" output="w"/>
-            <key code="14" output="e"/>
-            <key code="15" output="r"/>
+            <key code="11" output="%"/>
+            <key code="12" output="^"/>
+            <key code="13" output="&#x0026;"/>
+            <key code="14" output="["/>
+            <key code="15" output="]"/>
             <key code="16" output=""/>
-            <key code="17" output=""/>
-            <key code="18" output="1"/>
-            <key code="19" output="2"/>
-            <key code="20" output=""/>
-            <key code="21" output=""/>
-            <key code="22" output=""/>
-            <key code="23" output=""/>
-            <key code="24" output=""/>
-            <key code="25" output="("/>
-            <key code="26" output=""/>
-            <key code="27" output=""/>
-            <key code="28" output=""/>
-            <key code="29" output=")"/>
+            <key code="17" output="₽"/>
+            <key code="18" output="!"/>
+            <key code="19" output="@"/>
+            <key code="20" output="#"/>
+            <key code="21" output="_"/>
+            <key code="22" output="&#x0022;"/>
+            <key code="23" output=":"/>
+            <key code="24" output="="/>
+            <key code="25" output="*"/>
+            <key code="26" output=";"/>
+            <key code="27" output="-"/>
+            <key code="28" output="?"/>
+            <key code="29" output="+"/>
             <key code="30" output=""/>
-            <key code="31" output=";"/>
-            <key code="32" output="{"/>
+            <key code="31" output=""/>
+            <key code="32" output=""/>
             <key code="33" output=""/>
-            <key code="34" output="}"/>
-            <key code="35" output=":"/>
+            <key code="34" output=""/>
+            <key code="35" output=""/>
             <key code="36" output="&#x000D;"/>
-            <key code="37" output="&#x0022;"/>
-            <key code="38" output="["/>
-            <key code="39" output=""/>
-            <key code="40" output="]"/>
-            <key code="41" output="&#x0027;"/>
-            <key code="42" output=""/>
+            <key code="37" output=""/>
+            <key code="38" output=""/>
+            <key code="39" output="\"/>
+            <key code="40" output=""/>
+            <key code="41" output=""/>
+            <key code="42" output="|"/>
             <key code="43" output=","/>
-            <key code="44" output=""/>
-            <key code="45" output="&#x003C;"/>
-            <key code="46" output="&#x003E;"/>
+            <key code="44" output="/"/>
+            <key code="45" output=""/>
+            <key code="46" output=""/>
             <key code="47" output="."/>
             <key code="48" output="&#x0009;"/>
             <key code="49" output=""/>
-            <key code="50" output=""/>
+            <key code="50" output="`"/>
             <key code="51" output="&#x0008;"/>
             <key code="53" output="&#x001B;"/>
             <key code="64" output="&#x0010;"/>
@@ -379,19 +381,19 @@
             <key code="27" output="-"/>
             <key code="28" output="8"/>
             <key code="29" output="0"/>
-            <key code="30" output="]"/>
+            <key code="30" output=""/>
             <key code="31" output="o"/>
             <key code="32" output="u"/>
-            <key code="33" output="["/>
+            <key code="33" output=""/>
             <key code="34" output="i"/>
             <key code="35" output="p"/>
             <key code="36" output="&#x000D;"/>
             <key code="37" output="l"/>
             <key code="38" output="j"/>
-            <key code="39" output="&#x0027;"/>
+            <key code="39" output=""/>
             <key code="40" output="k"/>
-            <key code="41" output=";"/>
-            <key code="42" output="\"/>
+            <key code="41" output=""/>
+            <key code="42" output="|"/>
             <key code="43" output=","/>
             <key code="44" output="/"/>
             <key code="45" output="n"/>
