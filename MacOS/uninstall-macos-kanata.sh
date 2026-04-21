@@ -5,6 +5,16 @@ info() {
   printf '==> %s\n' "$*"
 }
 
+require_app_bundle_path() {
+  case "$1" in
+    /*.app) ;;
+    *)
+      printf 'error: KANATA_APP_DIR must be an absolute .app path, got: %s\n' "$1" >&2
+      exit 1
+      ;;
+  esac
+}
+
 default_install_bin_dir() {
   local brew_prefix
 
@@ -24,6 +34,7 @@ default_install_bin_dir() {
 }
 
 INSTALL_BIN_DIR="${INSTALL_BIN_DIR:-$(default_install_bin_dir)}"
+KANATA_APP_DIR="${KANATA_APP_DIR:-/Applications/Kanata.app}"
 CONFIG_DEST="${CONFIG_DEST:-/etc/kanata/kanata.kbd}"
 KANATA_LABEL="${KANATA_LABEL:-com.alenkimov.kanata}"
 HELPER_LABEL="${HELPER_LABEL:-com.alenkimov.kanata-input-source-helper}"
@@ -33,7 +44,7 @@ HELPER_LOG="${HELPER_LOG:-/tmp/kanata-input-source-helper.log}"
 OLD_KANATA_LABEL="dev.kanata.kanata"
 OLD_HELPER_LABEL="dev.kanata.input-source-helper"
 
-KANATA_BIN="$INSTALL_BIN_DIR/kanata"
+OLD_KANATA_BIN="$INSTALL_BIN_DIR/kanata"
 HELPER_BIN="$INSTALL_BIN_DIR/kanata-input-source-helper"
 KANATA_PLIST="/Library/LaunchDaemons/$KANATA_LABEL.plist"
 HELPER_PLIST="$HOME/Library/LaunchAgents/$HELPER_LABEL.plist"
@@ -50,6 +61,8 @@ if [[ "$(id -u)" == "0" ]]; then
   exit 1
 fi
 
+require_app_bundle_path "$KANATA_APP_DIR"
+
 USER_ID="$(id -u)"
 
 info "stopping Kanata LaunchDaemon"
@@ -63,10 +76,11 @@ launchctl bootout "gui/$USER_ID/$OLD_HELPER_LABEL" >/dev/null 2>&1 || true
 rm -f "$HELPER_PLIST" "$OLD_HELPER_PLIST"
 
 if [[ "${REMOVE_BINARIES:-0}" == "1" ]]; then
-  info "removing installed binaries"
-  sudo rm -f "$KANATA_BIN" "$HELPER_BIN"
+  info "removing installed app and binaries"
+  sudo rm -rf "$KANATA_APP_DIR"
+  sudo rm -f "$OLD_KANATA_BIN" "$HELPER_BIN"
 else
-  info "keeping binaries; set REMOVE_BINARIES=1 to remove them"
+  info "keeping app and binaries; set REMOVE_BINARIES=1 to remove them"
 fi
 
 if [[ "${REMOVE_CONFIG:-0}" == "1" ]]; then

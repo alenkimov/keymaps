@@ -174,15 +174,14 @@
    ```
 
    Скрипт сам берёт `kanata.kbd` рядом с собой, собирает мой форк Kanata,
-   копирует конфиг в `/etc/kanata/kanata.kbd` и настраивает `launchd`:
-   root LaunchDaemon для Kanata и пользовательский LaunchAgent для
-   `kanata-input-source-helper`.
+   создаёт `/Applications/Kanata.app`, копирует конфиг в
+   `/etc/kanata/kanata.kbd` и настраивает `launchd`: root LaunchDaemon для
+   Kanata и пользовательский LaunchAgent для `kanata-input-source-helper`.
 
-   По умолчанию бинарники ставятся в Homebrew `bin`, если он найден:
-   `/opt/homebrew/bin` на Apple Silicon или `/usr/local/bin` на Intel Mac.
    Скрипт откроет macOS privacy-настройки перед запуском сервисов. Нужно
-   включить `kanata` в `Accessibility`, вернуться в терминал и нажать Enter.
-   Если `kanata` нет в списке, добавить бинарник из Homebrew `bin` кнопкой `+`.
+   включить `Kanata.app` в `Accessibility`, вернуться в терминал и нажать
+   Enter. Если `Kanata.app` нет в списке, добавить `/Applications/Kanata.app`
+   кнопкой `+`.
 
 5. Проверить статус и логи, если что-то не работает.
 
@@ -204,7 +203,7 @@ cd MacOS
 
 ```sh
 CONFIG_SOURCE=/path/to/kanata.kbd ./install-macos-kanata.sh
-INSTALL_BIN_DIR=/usr/local/bin ./install-macos-kanata.sh
+KANATA_APP_DIR=/Applications/Kanata-dev.app ./install-macos-kanata.sh
 ```
 
 ## Моя настройка Mac
