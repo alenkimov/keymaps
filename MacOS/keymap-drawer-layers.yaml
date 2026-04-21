@@ -5,9 +5,9 @@ layers:
     - &func_row [Esc, F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12]
     - &symbol_row ['`', '!', '@', '#', '_', ':', ';', '"', '?', '*', '+', '-', '=', '⌫']
     - &base_tab_row [Tab, *g, *g, *g, *g, *g, *g, *g, *g, *g, *g, *g, *g, '|']
-    - &caps ['.', *g, *g, *g, *g, *g, *g, *g, *g, *g, *g, *g, Enter]
-    - &shift [',', *g, *g, *g, *g, *g, *g, *g, *g, *g, '/', '\']
-    - &bottom_row [⌘, ⌃, ⌥, Shift, Space, Nav, Lang]
+    - &caps_row ['.', *g, *g, *g, *g, *g, *g, *g, *g, *g, *g, *g, Enter]
+    - &shift_row [',', *g, *g, *g, *g, *g, *g, *g, *g, *g, '/', '\']
+    - &bottom_row [Del, ⌃, ⌥, ⌘, Shift/Space, Nav, Lang, 'Vol+', 'Bri-', 'Vol-', 'Bri+']
 
   Shift:
     - *func_row
@@ -26,10 +26,10 @@ layers:
         '-', '=', '⌫'
       ]
     - *base_tab_row
-    - *caps
-    - *shift
-    - [⌘, ⌃, ⌥, {t: Shift, type: held}, Space, Nav, Lang]
-  
+    - *caps_row
+    - *shift_row
+    - [Del, ⌃, ⌥, ⌘, {t: Shift, type: held}, Nav, Lang, 'Vol+', 'Bri-', 'Vol-', 'Bri+']
+
   Nav:
     - *func_row
     - *symbol_row
@@ -65,6 +65,7 @@ layers:
         {t: '{', type: held},
         {t: '}', type: held},
         {t: '%', type: held},
-        *g, *g, *g, *g, '/', '\'
+        *g, *g, *g, *g,
+        '/', '\'
       ]
-    - [⌘, ⌃, ⌥, Shift, Space, {t: Nav, type: held}, Lang]
+    - [Del, ⌃, ⌥, ⌘, Space, {t: Nav, type: held}, Lang, 'Vol+', 'Bri-', 'Vol-', 'Bri+']
