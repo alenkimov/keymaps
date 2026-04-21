@@ -141,8 +141,71 @@
 
 ![mac keymap](MacOS/imgs/mac_keymap.png)
 
-1. Скачиваем и устанавливаем [Karabiner-Elements](https://karabiner-elements.pqrs.org)
-2. Устанавливаем [мой форк kanata](https://github.com/alenkimov/kanata/tree/feat/macos-input-source-helper) и мою раскладку из файла `kanata.kbd`
+Раскладка для обычной клавиатуры Mac лежит в `MacOS/kanata.kbd`.
+В конфиге Kanata сама переключает системную раскладку между `US` и `RussianWin`, поэтому обе раскладки должны быть добавлены в macOS.
+
+### Установка Kanata на macOS
+
+1. Установить [Karabiner-Elements](https://karabiner-elements.pqrs.org).
+
+   Kanata на macOS использует виртуальный HID-драйвер Karabiner для отправки нажатий. После установки нужно один раз открыть Karabiner-Elements и выдать все разрешения, которые попросит macOS:
+   - `System Settings -> Privacy & Security -> Accessibility`
+   - `System Settings -> General -> Login Items & Extensions`, если macOS попросит включить driver/background item
+
+2. Добавить системные раскладки, на которые ссылается `kanata.kbd`.
+
+   Открыть `System Settings -> Keyboard -> Text Input -> Edit...` и добавить:
+   - `English -> U.S.`
+   - `Russian -> Russian - PC`
+
+   В конфиге они используются как `com.apple.keylayout.US` и `com.apple.keylayout.RussianWin`.
+
+3. Установить Rust, если его ещё нет. Например, через Homebrew:
+
+   ```sh
+   brew install rust
+   ```
+
+4. Запустить установочный скрипт из папки `MacOS`.
+
+   ```sh
+   cd MacOS
+   ./install-macos-kanata.sh
+   ```
+
+   Скрипт сам берёт `kanata.kbd` рядом с собой, собирает мой форк Kanata,
+   копирует конфиг в `/etc/kanata/kanata.kbd` и настраивает `launchd`:
+   root LaunchDaemon для Kanata и пользовательский LaunchAgent для
+   `kanata-input-source-helper`.
+
+   По умолчанию бинарники ставятся в Homebrew `bin`, если он найден:
+   `/opt/homebrew/bin` на Apple Silicon или `/usr/local/bin` на Intel Mac.
+   Скрипт откроет macOS privacy-настройки перед запуском сервисов. Нужно
+   включить `kanata` в `Accessibility`, вернуться в терминал и нажать Enter.
+   Если `kanata` нет в списке, добавить бинарник из Homebrew `bin` кнопкой `+`.
+
+5. Проверить статус и логи, если что-то не работает.
+
+   ```sh
+   sudo launchctl print system/com.alenkimov.kanata
+   launchctl print gui/$(id -u)/com.alenkimov.kanata-input-source-helper
+   tail -f /tmp/kanata.log
+   tail -f /tmp/kanata-input-source-helper.log
+   ```
+
+Удалить launchd-сервисы:
+
+```sh
+cd MacOS
+./uninstall-macos-kanata.sh
+```
+
+Полезные overrides:
+
+```sh
+CONFIG_SOURCE=/path/to/kanata.kbd ./install-macos-kanata.sh
+INSTALL_BIN_DIR=/usr/local/bin ./install-macos-kanata.sh
+```
 
 ## Моя настройка Mac
 
@@ -162,6 +225,13 @@
 Отключить Quick Note на правый нижний угол в `System Settings → Desctope & Dock -> Hot corners...`
 
 Включить разворот окна на весь экран по двойному нажатию в `System Settings → Desktop & Dock -> Window title bar double-click action`
+
+По желанию отключаем системный пузырёк-индикатор языка, чтобы он не отвлекал:
+```sh
+defaults write kCFPreferencesAnyApplication TSMLanguageIndicatorEnabled -bool false
+```
+
+Этот пузырёк часто показывает неверный язык, поэтому пользы от него меньше, чем визуального шума.
 
 ## Windows: Moonlander
 
