@@ -1,9 +1,7 @@
 # Мои раскладки для Moonlander и стандартной клавиатуры Mac
 
-СТАТЬЯ В РАЗРАБОТКЕ
-
-Вдохновение:
-- [статья от @optozorax](https://optozorax.github.io/p/my-keyboard-layout)
+Изменить свою раскладку меня побудили эти материалы:
+- [Статья от @optozorax](https://optozorax.github.io/p/my-keyboard-layout)
 - [Ergo Mods](https://dreymar.colemak.org/ergo-mods.html)
 - [Hands-Down](https://sites.google.com/alanreiser.com/handsdown/home/hands-down-neu)
 
