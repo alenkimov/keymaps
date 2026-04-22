@@ -27,10 +27,10 @@
     (layer-switch ru)
   )
 
-  toggle-lang (switch
-    ((input-source-is "com.apple.keylayout.US")) @ru break
-                                                () @us break
-  )
+  toggle-lang (tap-dance-eager 250 (
+    @us
+    @ru
+  ))
 
   nav (layer-while-held nav)
   sftspc (tap-hold 200 200 spc lsft)
