@@ -6,6 +6,8 @@
 - [Hands-Down](https://sites.google.com/alanreiser.com/handsdown/home/hands-down-neu)
 
 ## Вводные данные
+- Я НЕ пробовал Home Row Mode
+- Я НЕ пробовал комбо, аккорды
 - Я пользуюсь английской раскладкой QWERTY (26 букв) и русской раскладкой ЙЦУКЕН без Ё (32 буквы)
 - Слепая печать и пустые кейкапы без гравировки
 - Знаки препинания должны быть в одних и тех же местах независимо от раскладки
@@ -191,6 +193,20 @@
    tail -f /tmp/kanata.log
    tail -f /tmp/kanata-input-source-helper.log
    ```
+
+### Перезапуск Kanata
+
+Перезапустить Kanata одной командой:
+
+```sh
+sudo launchctl kickstart -k system/com.alenkimov.kanata
+```
+
+Если нужно перезапустить ещё и `kanata-input-source-helper`:
+
+```sh
+launchctl kickstart -k "gui/$(id -u)/com.alenkimov.kanata-input-source-helper" && sudo launchctl kickstart -k system/com.alenkimov.kanata
+```
 
 Удалить launchd-сервисы:
 
