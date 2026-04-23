@@ -1,0 +1,105 @@
+(defcfg
+  process-unmapped-keys yes
+)
+
+(defsrc
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft           up
+  fn   lctl lalt lmet spc                 rmet ralt                left down rght
+)
+
+(defalias
+  ;; ru letters
+  й q   ц w   у e   к r   е t   н y   г u   ш i   щ o   з p   х [   ъ ]
+  ф a   ы s   в d   а f   п g   р h   о j   л k   д l   ж ;   э '
+  я z   ч x   с c   м v   и b   т n   ь m   б ,   ю .
+
+  ьъ (tap-dance 400 (
+    @ь
+    @ъ
+  ))
+
+  ;; common
+  us (multi
+    (set-input-source "com.apple.keylayout.US")
+    (layer-switch us)
+  )
+
+  ru (multi
+    (set-input-source "com.apple.keylayout.RussianWin")
+    (layer-switch ru)
+  )
+
+  lang (tap-dance-eager 400 (
+    @us
+    @ru
+  ))
+
+  nav (layer-while-held nav)
+  sftspc (tap-hold 200 200 spc lsft)
+
+  dot     (unicode U+002E)
+  comma   (unicode U+002C)
+  slash   (unicode U+002F)
+  pipe    (unicode U+007C)
+  bslash  (unicode U+005C)
+  apos    (unicode U+0027)
+
+  grave (unicode U+0060)
+  k_1   (fork (unicode U+0021) (unshift 1) (lsft rsft))
+  k_2   (fork (unicode U+0040) (unshift 2) (lsft rsft))
+  k_3   (fork (unicode U+0023) (unshift 3) (lsft rsft))
+  k_4   (fork (unicode U+005F) (unshift 4) (lsft rsft))
+  k_5   (fork (unicode U+003A) (unshift 5) (lsft rsft))
+  k_6   (fork (unicode U+003B) (unshift 6) (lsft rsft))
+  k_7   (fork (unicode U+0022) (unshift 7) (lsft rsft))
+  k_8   (fork (unicode U+003F) (unshift 8) (lsft rsft))
+  k_9   (fork (unicode U+002A) (unshift 9) (lsft rsft))
+  k_0   (fork (unicode U+002B) (unshift 0) (lsft rsft))
+  k_minus_emdash (tap-dance 400 (
+    (unicode U+002D)
+    (unicode U+2014)
+  ))
+  k_eq  (unicode U+003D)
+
+  caret   (unicode U+005E)
+  amp     (unicode U+0026)
+  lbrack  (unicode U+005B)
+  rbrack  (unicode U+005D)
+  ruble   (unicode U+20BD)
+  lt      (unicode U+003C)
+  gt      (unicode U+003E)
+  lparen  (unicode U+0028)
+  rparen  (unicode U+0029)
+  dollar  (unicode U+0024)
+  tilde   (unicode U+007E)
+  lbrace  (unicode U+007B)
+  rbrace  (unicode U+007D)
+  percent (unicode U+0025)
+)
+
+(deflayer us
+  @grave  @k_1   @k_2   @k_3    @k_4    @k_5     @k_6   @k_7   @k_8   @k_9   @k_0   @k_minus_emdash @k_eq  @pipe
+  tab     q      w      e       r       t        @apos  y      u      i      o      p               XX     @bslash
+  @dot    a      s      d       f       g        ret    h      j      k      l      XX              XX
+  @comma  z      x      c       v       b        @lang  n      m      XX     XX     @slash          volu
+  del     lctl   lalt   lmet    @sftspc                               bspc   @nav              brdn vold brup
+)
+
+(deflayer ru
+  @grave  @k_1   @k_2   @k_3    @k_4    @k_5     @k_6   @k_7   @k_8   @k_9   @k_0   @k_minus_emdash @k_eq  @pipe
+  tab     @й     @ц     @у      @к      @е       @apos  @н     @г     @ш     @щ     @з              @х     @bslash
+  @dot    @ф     @ы     @в      @а      @п       ret    @р     @о     @л     @д     @ж              @э
+  @comma  @я     @ч     @с      @м      @и       @lang  @т     @ьъ    @б     @ю     @slash          volu
+  del     lctl   lalt   lmet    @sftspc                               bspc   @nav              brdn vold brup
+)
+
+(deflayer nav
+  @grave  @k_1   @k_2   @k_3    @k_4    @k_5     @k_6   @k_7   @k_8   @k_9   @k_0   @k_minus_emdash @k_eq  @pipe
+  tab     @caret @amp   @lbrack @rbrack @ruble   @apos  XX     home   up     end    XX              XX     @bslash
+  @dot    @lt    @gt    @lparen @rparen @dollar  ret    XX     left   down   rght   XX              XX
+  @comma  XX     XX     @lbrace @rbrace @percent @lang  XX     XX     XX     XX     @slash          volu
+  del     lctl   lalt   lmet    @sftspc                               bspc   @nav              brdn vold brup
+)

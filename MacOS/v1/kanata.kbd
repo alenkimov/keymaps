@@ -16,6 +16,11 @@
   ф a   ы s   в d   а f   п g   р h   о j   л k   д l   ж ;   э '
   я z   ч x   с c   м v   и b   т n   ь m   б ,   ю .
 
+  ьъ (tap-dance 400 (
+    @ь
+    @ъ
+  ))
+
   ;; common
   us (multi
     (set-input-source "com.apple.keylayout.US")
@@ -27,7 +32,7 @@
     (layer-switch ru)
   )
 
-  toggle-lang (tap-dance-eager 250 (
+  toggle-lang (tap-dance-eager 400 (
     @us
     @ru
   ))
@@ -52,7 +57,10 @@
   k_8   (fork (unicode U+003F) (unshift 8) (lsft rsft))
   k_9   (fork (unicode U+002A) (unshift 9) (lsft rsft))
   k_0   (fork (unicode U+002B) (unshift 0) (lsft rsft))
-  k_min (unicode U+002D)
+  k_minus_emdash (tap-dance 400 (
+    (unicode U+002D)
+    (unicode U+2014)
+  ))
   k_eq  (unicode U+003D)
 
   nav_caret   (unicode U+005E)
@@ -72,25 +80,25 @@
 )
 
 (deflayer us
-  @k_grv  @k_1   @k_2   @k_3   @k_4   @k_5   @k_6   @k_7   @k_8   @k_9   @k_0   @k_min @k_eq  bspc
-  q       w      e      r      t      y      u      i      o      p      XX     XX     @pipe
+  @k_grv  @k_1   @k_2   @k_3   @k_4   @k_5   @k_6   @k_7   @k_8   @k_9   @k_0   @k_minus_emdash @k_eq  @pipe
+  q       w      e      r      t      y      u      i      o      p      XX     bspc    XX
   @dot    a      s      d      f      g      h      j      k      l      XX     XX     ret
   @comma  z      x      c      v      b      n      m      XX     XX     @slash @bslash volu
   del     lctl   lalt   lmet   @sftspc @nav  @toggle-lang                       brdn  vold brup
 )
 
 (deflayer ru
-  @k_grv  @k_1   @k_2   @k_3   @k_4   @k_5   @k_6   @k_7   @k_8   @k_9   @k_0   @k_min @k_eq  bspc
-  @й      @ц     @у     @к     @е     @н     @г     @ш     @щ     @з     @х     @ъ     @pipe
+  @k_grv  @k_1   @k_2   @k_3   @k_4   @k_5   @k_6   @k_7   @k_8   @k_9   @k_0   @k_minus_emdash @k_eq  @pipe
+  @й      @ц     @у     @к     @е     @н     @г     @ш     @щ     @з     @х     bspc    XX
   @dot    @ф     @ы     @в     @а     @п     @р     @о     @л     @д     @ж     @э     ret
-  @comma  @я     @ч     @с     @м     @и     @т     @ь     @б     @ю     @slash @bslash volu
+  @comma  @я     @ч     @с     @м     @и     @т     @ьъ    @б     @ю     @slash @bslash volu
   del     lctl   lalt   lmet   @sftspc @nav  @toggle-lang                       brdn  vold brup
 )
 
 (deflayer nav
-  @k_grv      @k_1     @k_2         @k_3         @k_4         @k_5         @k_6  @k_7  @k_8  @k_9  @k_0  @k_min @k_eq  bspc
-  @nav_caret  @nav_amp @nav_lbrack  @nav_rbrack  @nav_ruble   y            u     up    o     p     [     ]      @pipe
-  @dot        @nav_lt  @nav_gt      @nav_lparen  @nav_rparen  @nav_dollar  home  left  down  rght  end   '      ret
-  @comma      z        x            @nav_lbrace  @nav_rbrace  @nav_percent n     m     ,     .     @slash @bslash volu
+  @k_grv      @k_1     @k_2         @k_3         @k_4         @k_5         @k_6  @k_7  @k_8  @k_9  @k_0  @k_minus_emdash @k_eq  @pipe
+  @nav_caret  @nav_amp @nav_lbrack  @nav_rbrack  @nav_ruble   XX           XX    up    XX    XX    XX    bspc   XX
+  @dot        @nav_lt  @nav_gt      @nav_lparen  @nav_rparen  @nav_dollar  home  left  down  rght  end   XX     ret
+  @comma      XX       XX           @nav_lbrace  @nav_rbrace  @nav_percent XX    XX    XX    XX    @slash @bslash volu
   del         lctl     lalt         lmet         @sftspc      @nav         @toggle-lang                       brdn  vold brup
 )

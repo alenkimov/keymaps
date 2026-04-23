@@ -74,6 +74,23 @@ default_install_bin_dir() {
   fi
 }
 
+default_config_source() {
+  local candidate
+
+  for candidate in \
+    "$SCRIPT_DIR/kanata.kbd" \
+    "$SCRIPT_DIR/v2/kanata.kbd" \
+    "$SCRIPT_DIR/v1/kanata.kbd"
+  do
+    if [[ -f "$candidate" ]]; then
+      printf '%s\n' "$candidate"
+      return
+    fi
+  done
+
+  printf '%s\n' "$SCRIPT_DIR/v2/kanata.kbd"
+}
+
 xml_escape() {
   sed \
     -e 's/&/\&amp;/g' \
@@ -91,7 +108,7 @@ KANATA_GIT_BRANCH="${KANATA_GIT_BRANCH:-main}"
 INSTALL_BIN_DIR="${INSTALL_BIN_DIR:-$(default_install_bin_dir)}"
 KANATA_APP_DIR="${KANATA_APP_DIR:-/Applications/Kanata.app}"
 KANATA_BUNDLE_ID="${KANATA_BUNDLE_ID:-com.alenkimov.Kanata}"
-CONFIG_SOURCE="${CONFIG_SOURCE:-$SCRIPT_DIR/kanata.kbd}"
+CONFIG_SOURCE="${CONFIG_SOURCE:-$(default_config_source)}"
 CONFIG_DEST="${CONFIG_DEST:-/etc/kanata/kanata.kbd}"
 KANATA_LABEL="${KANATA_LABEL:-com.alenkimov.kanata}"
 HELPER_LABEL="${HELPER_LABEL:-com.alenkimov.kanata-input-source-helper}"
@@ -125,7 +142,7 @@ require_command git
 require_command launchctl
 require_command plutil
 
-[[ -f "$CONFIG_SOURCE" ]] || die "config not found: $CONFIG_SOURCE. Keep kanata.kbd next to this script or set CONFIG_SOURCE=/path/to/kanata.kbd"
+[[ -f "$CONFIG_SOURCE" ]] || die "config not found: $CONFIG_SOURCE. Keep a layout at MacOS/v2/kanata.kbd or set CONFIG_SOURCE=/path/to/kanata.kbd"
 
 USER_ID="$(id -u)"
 TMP_DIR="$(mktemp -d)"
