@@ -16,9 +16,9 @@
   ф a   ы s   в d   а f   п g   р h   о j   л k   д l   ж ;   э '
   я z   ч x   с c   м v   и b   т n   ь m   б ,   ю .
 
-  ьъ (tap-dance 400 (
+  ьъ (tap-dance-eager 400 (
     @ь
-    @ъ
+    (macro bspc @ъ)
   ))
 
   ;; common
@@ -58,7 +58,7 @@
   k_8   (fork (unicode U+003F) (unshift 8) (lsft rsft))
   k_9   (fork (unicode U+002A) (unshift 9) (lsft rsft))
   k_0   (fork (unicode U+002B) (unshift 0) (lsft rsft))
-  k_minus_emdash (tap-dance 400 (
+  k_minus_emdash (tap-dance 300 (
     (unicode U+002D)
     (unicode U+2014)
   ))
