@@ -260,12 +260,57 @@ defaults write kCFPreferencesAnyApplication TSMLanguageIndicatorEnabled -bool fa
 
 Этот пузырёк часто показывает неверный язык, поэтому пользы от него меньше, чем визуального шума.
 
-## Windows: Moonlander
+## Moonlander
 
-Поскольку я не умею писать на C, пришлось менять системные раскладки с помощью [MSKLC](https://www.microsoft.com/en-us/download/details.aspx?id=102134).
+Актуальная QMK-раскладка лежит в `moonlander/alenkimov`.
 
-### Установка
+Прошивка рассчитана на стандартные системные раскладки:
+- Windows: `English (United States) -> US`
+- Windows: `Russian -> Russian`
 
-Устанавливаем [прошивку](https://configure.zsa.io/moonlander/layouts/WazEM/latest/0) прямо из браузера
+В прошивке есть отдельные базовые слои `_US` и `_RU`; кнопка языка переключает системную раскладку абсолютными хоткеями и одновременно переключает базовый слой клавиатуры.
 
-Скачиваем этот репозиторий и устанавливаем модифицированную русскую раскладку через `setup.exe`. Старую русскую раскладку можно удалить. После установки перезагружаем систему.
+Перед использованием нужно настроить Windows так, чтобы:
+- `Alt+Shift+1` включал английскую раскладку
+- `Alt+Shift+2` включал русскую раскладку
+
+Если поменять язык мышкой, Win+Space или другим хоткеем, клавиатура может рассинхронизироваться с системой. Нормальный сценарий: менять язык только кнопкой `Lang` на Moonlander.
+
+### Сборка
+
+Установить QMK MSYS по инструкции QMK:
+
+```sh
+qmk setup zsa/qmk_firmware -b firmware25
+```
+
+Скопировать раскладку из этого репозитория в QMK:
+
+```sh
+cp -r /c/Users/fleda/c/keymaps/moonlander/alenkimov ~/qmk_firmware/keyboards/zsa/moonlander/keymaps/
+```
+
+Если папка уже существует, удалить старую копию или синхронизировать файлы вручную.
+
+Собрать прошивку:
+
+```sh
+cd ~/qmk_firmware
+qmk compile -kb zsa/moonlander/reva -km alenkimov
+qmk compile -kb zsa/moonlander/revb -km alenkimov
+```
+
+Готовый `.bin` появится в корне `~/qmk_firmware`.
+
+### Прошивка
+
+Установить ZSA Keymapp и прошить собранный `.bin`:
+
+1. Открыть Keymapp.
+2. Перейти в `Flash`.
+3. Выбрать собранный файл `zsa_moonlander_revb_alenkimov.bin` или `zsa_moonlander_reva_alenkimov.bin`.
+4. Когда Keymapp попросит, перевести клавиатуру в bootloader.
+
+В bootloader можно попасть двумя способами:
+- нажать reset-кнопку на клавиатуре
+- удержать слой `Nums` и нажать `QK_BOOT`, если текущая прошивка уже содержит эту клавишу
