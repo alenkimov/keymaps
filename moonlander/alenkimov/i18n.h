@@ -4,4 +4,7 @@
 #define RU_HARD KC_RBRC
 #define RU_BE KC_COMM
 #define RU_YU KC_DOT
+#define RU_DOT KC_SLASH
+#define RU_COMMA LSFT(KC_SLASH)
+#define RU_SLASH LSFT(KC_BSLS)
 #define RU_RUBL ALGR(KC_8)

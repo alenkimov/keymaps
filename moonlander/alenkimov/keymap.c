@@ -8,6 +8,26 @@
 
 enum custom_keycodes {
   RGB_SLD = ZSA_SAFE_RANGE,
+  RU_EXLM,
+  RU_AT,
+  RU_HASH,
+  RU_UNDS,
+  RU_COLN,
+  RU_SCLN,
+  RU_GRAVE,
+  RU_AMPR,
+  RU_QUOTE,
+  RU_DQUO,
+  RU_QUES,
+  RU_ASTR,
+  RU_PLUS,
+  RU_MINUS,
+  RU_EQUAL,
+  RU_PIPE,
+  DOT_KEY,
+  COMMA_KEY,
+  SLASH_KEY,
+  BSLS_KEY,
 };
 
 
@@ -17,17 +37,33 @@ enum tap_dance_codes {
   DANCE_1,
 };
 
+enum layers {
+  _US,
+  _RU,
+  _NUM,
+  _NAV,
+  _GAME,
+  _FN,
+};
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [0] = LAYOUT_moonlander(
-    KC_ESCAPE,      KC_EXLM,        KC_AT,          KC_HASH,        KC_UNDS,        KC_COLN,        KC_SCLN,                                        KC_DQUO,        KC_QUES,        KC_ASTR,        KC_PLUS,        KC_MINUS,       KC_EQUAL,       KC_PIPE,        
-    KC_TAB,         KC_Q,           KC_W,           KC_E,           KC_R,           KC_T,           KC_GRAVE,                                       KC_QUOTE,       KC_Y,           KC_U,           KC_I,           KC_O,           KC_P,           RU_HA,          
-    KC_DOT,         KC_A,           KC_S,           KC_D,           KC_F,           KC_G,           TG(3),                                                                          KC_AMPR,        KC_H,           KC_J,           KC_K,           KC_L,           RU_ZHE,         RU_E,           
-    KC_COMMA,       KC_Z,           KC_X,           KC_C,           KC_V,           KC_B,                                           KC_N,           TD(DANCE_0),    RU_BE,          RU_YU,          KC_SLASH,       KC_BSLS,        
-    KC_DELETE,      KC_LEFT_GUI,    KC_LEFT_ALT,    KC_NO,          MO(1),          KC_ENTER,                                                                                                       KC_TRANSPARENT, MO(2),          KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
-    KC_SPACE,       KC_LEFT_SHIFT,  KC_LEFT_CTRL,                   MO(4),          TD(DANCE_1),    KC_BSPC
+  [_US] = LAYOUT_moonlander(
+    KC_ESCAPE,      RU_EXLM,        RU_AT,          RU_HASH,        RU_UNDS,        RU_COLN,        RU_SCLN,                                        RU_DQUO,        RU_QUES,        RU_ASTR,        RU_PLUS,        RU_MINUS,       RU_EQUAL,       RU_PIPE,        
+    KC_TAB,         KC_Q,           KC_W,           KC_E,           KC_R,           KC_T,           RU_GRAVE,                                       RU_QUOTE,       KC_Y,           KC_U,           KC_I,           KC_O,           KC_P,           KC_NO,          
+    DOT_KEY,        KC_A,           KC_S,           KC_D,           KC_F,           KC_G,           TG(_GAME),                                                                      RU_AMPR,        KC_H,           KC_J,           KC_K,           KC_L,           KC_NO,          KC_NO,          
+    COMMA_KEY,      KC_Z,           KC_X,           KC_C,           KC_V,           KC_B,                                           KC_N,           TD(DANCE_0),    KC_NO,          KC_NO,          SLASH_KEY,      BSLS_KEY,       
+    KC_DELETE,      KC_LEFT_GUI,    KC_LEFT_ALT,    KC_NO,          MO(_NUM),       KC_ENTER,                                                                                                       KC_TRANSPARENT, MO(_NAV),       KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
+    KC_SPACE,       KC_LEFT_SHIFT,  KC_LEFT_CTRL,                   MO(_FN),        TD(DANCE_1),    KC_BSPC
   ),
-  [1] = LAYOUT_moonlander(
+  [_RU] = LAYOUT_moonlander(
+    KC_ESCAPE,      RU_EXLM,        RU_AT,          RU_HASH,        RU_UNDS,        RU_COLN,        RU_SCLN,                                        RU_DQUO,        RU_QUES,        RU_ASTR,        RU_PLUS,        RU_MINUS,       RU_EQUAL,       RU_PIPE,
+    KC_TAB,         KC_Q,           KC_W,           KC_E,           KC_R,           KC_T,           RU_GRAVE,                                       RU_QUOTE,       KC_Y,           KC_U,           KC_I,           KC_O,           KC_P,           RU_HA,
+    DOT_KEY,        KC_A,           KC_S,           KC_D,           KC_F,           KC_G,           TG(_GAME),                                                                      RU_AMPR,        KC_H,           KC_J,           KC_K,           KC_L,           RU_ZHE,         RU_E,
+    COMMA_KEY,      KC_Z,           KC_X,           KC_C,           KC_V,           KC_B,                                           KC_N,           TD(DANCE_0),    RU_BE,          RU_YU,          SLASH_KEY,      BSLS_KEY,
+    KC_DELETE,      KC_LEFT_GUI,    KC_LEFT_ALT,    KC_NO,          MO(_NUM),       KC_ENTER,                                                                                                       KC_TRANSPARENT, MO(_NAV),       KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_SPACE,       KC_LEFT_SHIFT,  KC_LEFT_CTRL,                   MO(_FN),        TD(DANCE_1),    KC_BSPC
+  ),
+  [_NUM] = LAYOUT_moonlander(
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
     KC_TRANSPARENT, KC_CIRC,        KC_7,           KC_8,           KC_9,           RU_RUBL,        KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
     KC_TRANSPARENT, KC_0,           KC_4,           KC_5,           KC_6,           KC_DLR,         KC_NO,                                                                          KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
@@ -35,7 +71,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                                                                                 KC_TRANSPARENT, KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, QK_BOOT,        
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT
   ),
-  [2] = LAYOUT_moonlander(
+  [_NAV] = LAYOUT_moonlander(
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
     KC_TRANSPARENT, KC_NO,          KC_NO,          KC_LBRC,        KC_RBRC,        KC_NO,          KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_NO,          KC_HOME,        KC_UP,          KC_END,         KC_NO,          KC_NO,          
     KC_TRANSPARENT, KC_LABK,        KC_RABK,        KC_LPRN,        KC_RPRN,        KC_NO,          KC_NO,                                                                          KC_TRANSPARENT, KC_NO,          KC_LEFT,        KC_DOWN,        KC_RIGHT,       KC_NO,          KC_NO,          
@@ -43,7 +79,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_TRANSPARENT,                                                                                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT
   ),
-  [3] = LAYOUT_moonlander(
+  [_GAME] = LAYOUT_moonlander(
     KC_TRANSPARENT, KC_1,           KC_2,           KC_3,           KC_4,           KC_5,           KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_6,           KC_7,           KC_8,           KC_9,           KC_0,           KC_TRANSPARENT, 
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
@@ -51,7 +87,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_LEFT_CTRL,   KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_TRANSPARENT,                                                                                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_MINUS,       KC_EQUAL,       KC_TRANSPARENT, 
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
   ),
-  [4] = LAYOUT_moonlander(
+  [_FN] = LAYOUT_moonlander(
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_NO,          KC_F10,         KC_F11,         KC_F12,         KC_NO,          KC_TRANSPARENT, 
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_NO,          KC_F7,          KC_F8,          KC_F9,          KC_NO,          KC_NO,          
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,                                                                          KC_TRANSPARENT, KC_NO,          KC_F4,          KC_F5,          KC_F6,          KC_NO,          KC_NO,          
@@ -112,19 +148,20 @@ bool rgb_matrix_indicators_user(void) {
   }
   if (!keyboard_config.disable_layer_led) { 
     switch (biton32(layer_state)) {
-      case 0:
+      case _US:
+      case _RU:
         set_layer_color(0);
         break;
-      case 1:
+      case _NUM:
         set_layer_color(1);
         break;
-      case 2:
+      case _NAV:
         set_layer_color(2);
         break;
-      case 3:
+      case _GAME:
         set_layer_color(3);
         break;
-      case 4:
+      case _FN:
         set_layer_color(4);
         break;
      default:
@@ -213,9 +250,11 @@ void dance_1_reset(tap_dance_state_t *state, void *user_data);
 void on_dance_1(tap_dance_state_t *state, void *user_data) {
     if(state->count == 1) {
         tap_code16(LALT(LSFT(KC_1)));
+        default_layer_set(1UL << _US);
     }
     if(state->count == 2) {
         tap_code16(LALT(LSFT(KC_2)));
+        default_layer_set(1UL << _RU);
     }
 }
 
@@ -230,6 +269,47 @@ tap_dance_action_t tap_dance_actions[] = {
         [DANCE_1] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_1, dance_1_finished, dance_1_reset),
 };
 
+void tap_without_shift(uint16_t keycode) {
+    uint8_t mods = get_mods();
+    uint8_t oneshot_mods = get_oneshot_mods();
+
+    del_mods(MOD_MASK_SHIFT);
+    del_oneshot_mods(MOD_MASK_SHIFT);
+    send_keyboard_report();
+
+    tap_code16(keycode);
+
+    set_mods(mods);
+    set_oneshot_mods(oneshot_mods);
+    send_keyboard_report();
+}
+
+bool is_ru_base_layer(void) {
+    return default_layer_state & (1UL << _RU);
+}
+
+void tap_us_symbol(uint16_t keycode) {
+    uint8_t mods = get_mods();
+    uint8_t oneshot_mods = get_oneshot_mods();
+    bool ru_base_layer = is_ru_base_layer();
+
+    del_mods(MOD_MASK_SHIFT);
+    del_oneshot_mods(MOD_MASK_SHIFT);
+    send_keyboard_report();
+
+    if (ru_base_layer) {
+        tap_code16(LALT(LSFT(KC_1)));
+    }
+    tap_code16(keycode);
+    if (ru_base_layer) {
+        tap_code16(LALT(LSFT(KC_2)));
+    }
+
+    set_mods(mods);
+    set_oneshot_mods(oneshot_mods);
+    send_keyboard_report();
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
 
@@ -239,6 +319,106 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         if (record->event.pressed) {
             rgblight_mode(1);
+        }
+        return false;
+    case RU_EXLM:
+        if (record->event.pressed) {
+            tap_us_symbol(KC_EXLM);
+        }
+        return false;
+    case RU_AT:
+        if (record->event.pressed) {
+            tap_us_symbol(KC_AT);
+        }
+        return false;
+    case RU_HASH:
+        if (record->event.pressed) {
+            tap_us_symbol(KC_HASH);
+        }
+        return false;
+    case RU_UNDS:
+        if (record->event.pressed) {
+            tap_us_symbol(KC_UNDS);
+        }
+        return false;
+    case RU_COLN:
+        if (record->event.pressed) {
+            tap_us_symbol(KC_COLN);
+        }
+        return false;
+    case RU_SCLN:
+        if (record->event.pressed) {
+            tap_us_symbol(KC_SCLN);
+        }
+        return false;
+    case RU_GRAVE:
+        if (record->event.pressed) {
+            tap_us_symbol(KC_GRAVE);
+        }
+        return false;
+    case RU_AMPR:
+        if (record->event.pressed) {
+            tap_us_symbol(KC_AMPR);
+        }
+        return false;
+    case RU_QUOTE:
+        if (record->event.pressed) {
+            tap_us_symbol(KC_QUOTE);
+        }
+        return false;
+    case RU_DQUO:
+        if (record->event.pressed) {
+            tap_us_symbol(KC_DQUO);
+        }
+        return false;
+    case RU_QUES:
+        if (record->event.pressed) {
+            tap_us_symbol(KC_QUES);
+        }
+        return false;
+    case RU_ASTR:
+        if (record->event.pressed) {
+            tap_us_symbol(KC_ASTR);
+        }
+        return false;
+    case RU_PLUS:
+        if (record->event.pressed) {
+            tap_us_symbol(KC_PLUS);
+        }
+        return false;
+    case RU_MINUS:
+        if (record->event.pressed) {
+            tap_us_symbol(KC_MINUS);
+        }
+        return false;
+    case RU_EQUAL:
+        if (record->event.pressed) {
+            tap_us_symbol(KC_EQUAL);
+        }
+        return false;
+    case RU_PIPE:
+        if (record->event.pressed) {
+            tap_us_symbol(KC_PIPE);
+        }
+        return false;
+    case DOT_KEY:
+        if (record->event.pressed) {
+            tap_without_shift(is_ru_base_layer() ? RU_DOT : KC_DOT);
+        }
+        return false;
+    case COMMA_KEY:
+        if (record->event.pressed) {
+            tap_without_shift(is_ru_base_layer() ? RU_COMMA : KC_COMMA);
+        }
+        return false;
+    case SLASH_KEY:
+        if (record->event.pressed) {
+            tap_without_shift(is_ru_base_layer() ? RU_SLASH : KC_SLASH);
+        }
+        return false;
+    case BSLS_KEY:
+        if (record->event.pressed) {
+            tap_without_shift(KC_BSLS);
         }
         return false;
   }
