@@ -1,0 +1,246 @@
+_g:
+  - &g {t: '', type: ghost}
+  - &func_row [Esc, F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12]
+  - &symbol_row [
+    '`', '!', '@', '#',
+    '_',
+    ':',
+    *g,
+    '&',
+    '*',
+    '+',
+    '-',
+    '=',
+    *g,
+    '|'
+    ]
+  - &first_row [
+    Tab,
+    "Й Q",
+    "Ц W",
+    "У E",
+    "К R",
+    "Е T",
+    "'",
+    "Н Y",
+    "Г U",
+    "Ш I",
+    "Щ O",
+    "З P",
+    "Х _",
+    '\']
+  - &second_row [
+    '.',
+    "Ф A",
+    "Ы S",
+    "В D",
+    "А F",
+    "П G",
+    Enter,
+    "Р H",
+    "О J",
+    "Л K",
+    "Д L",
+    "Ж _",
+    "Э _"]
+  - &thrid_row [
+    ',',
+    "Я Z",
+    "Ч X",
+    "С C",
+    "М V",
+    "И B",
+    '$$mdi:translate$$',
+    "Т N",
+    "ЬЪ M",
+    "Б _",
+    "Ю _",
+    '/']
+  - &bottom_row [
+      '$$mdi:arrow-all$$',
+      '$$mdi:apple-keyboard-control$$',
+      '$$mdi:apple-keyboard-option$$',
+      '$$mdi:apple-keyboard-command$$',
+      Space,
+      '$$mdi:backspace-outline$$',
+      '$$mdi:numeric$$',
+      '$$mdi:volume-high$$',
+      '$$mdi:brightness-5$$',
+      '$$mdi:volume-low$$',
+      '$$mdi:brightness-7$$'
+    ]
+
+layers:
+  Main:
+    - *func_row
+    - *symbol_row
+    - *first_row
+    - *second_row
+    - *thrid_row
+    - *bottom_row
+
+  Shift:
+    - *func_row
+    - [
+    '`', '!', '@', '#',
+    '_',
+    {t: ';', type: held},
+    *g,
+    '&',
+    '*',
+    '+',
+    '-',
+    '=',
+    *g,
+    '|'
+    ]
+    - [
+        Tab,
+        "Й Q",
+        "Ц W",
+        "У E",
+        "К R",
+        "Е T",
+        {t: '"', type: held},
+        "Н Y",
+        "Г U",
+        "Ш I",
+        "Щ O",
+        "З P",
+        "Х _",
+        '\']
+    - *second_row
+    - [
+        ',',
+        "Я Z",
+        "Ч X",
+        "С C",
+        "М V",
+        "И B",
+        '$$mdi:translate$$',
+        "Т N",
+        "ЬЪ M",
+        "Б _",
+        "Ю _",
+        {t: '?', type: held},
+      ]
+    - [
+        '$$mdi:arrow-all$$',
+        '$$mdi:apple-keyboard-control$$',
+        '$$mdi:apple-keyboard-option$$',
+        '$$mdi:apple-keyboard-command$$',
+        {t: Shift, type: held},
+        '$$mdi:backspace-outline$$',
+      '$$mdi:numeric$$',
+        '$$mdi:volume-high$$',
+        '$$mdi:brightness-5$$',
+        '$$mdi:volume-low$$',
+        '$$mdi:brightness-7$$'
+      ]
+
+  Nav:
+    - *func_row
+    - *symbol_row
+    - [Tab,
+      *g,
+      {t: '↑', type: held},
+      *g,
+      *g,
+      *g,
+      "'",
+      *g,
+      {t: '[', type: held},
+      {t: ']', type: held},
+      *g,
+      *g, *g, '\']
+    - ['.',
+      {t: '←', type: held},
+      {t: '↓', type: held},
+      {t: '→', type: held},
+      *g,
+      *g,
+      Enter,
+      *g,
+      {t: '(', type: held},
+      {t: ')', type: held},
+      {t: '{', type: held},
+      {t: '}', type: held},
+      *g]
+    - [',',
+      *g,
+      {t: '$$mdi:backspace-reverse-outline$$', type: held},
+      *g,
+      *g,
+      *g,
+      '$$mdi:translate$$',
+      *g,
+      {t: '<', type: held},
+      {t: '>', type: held},
+      *g,
+      '/']
+    - [
+      {t: '$$mdi:arrow-all$$', type: held},
+      '$$mdi:apple-keyboard-control$$',
+      '$$mdi:apple-keyboard-option$$',
+      '$$mdi:apple-keyboard-command$$',
+      Space,
+      '$$mdi:backspace-outline$$',
+      '$$mdi:numeric$$',
+      '$$mdi:volume-high$$',
+      '$$mdi:brightness-5$$',
+      '$$mdi:volume-low$$',
+      '$$mdi:brightness-7$$'
+    ]
+
+  Num:
+    - *func_row
+    - *symbol_row
+    - [Tab,
+      {t: '^', type: held},
+      {t: '7', type: held},
+      {t: '8', type: held},
+      {t: '9', type: held},
+      {t: '₽', type: held},
+      "'",
+      *g,
+      *g,
+      *g,
+      *g,
+      *g, *g, '\']
+    - ['.',
+      {t: '0', type: held},
+      {t: '4', type: held},
+      {t: '5', type: held},
+      {t: '6', type: held},
+      {t: '$', type: held},
+      Enter,
+      *g,
+      *g,
+      *g,
+      *g,
+      *g, *g]
+    - [',',
+      {t: '~', type: held},
+      {t: '1', type: held},
+      {t: '2', type: held},
+      {t: '3', type: held},
+      {t: '%', type: held},
+      '$$mdi:translate$$',
+      *g,
+      *g,
+      *g,
+      *g,
+      '/']
+    - [
+      '$$mdi:arrow-all$$',
+      '$$mdi:apple-keyboard-control$$',
+      '$$mdi:apple-keyboard-option$$',
+      '$$mdi:apple-keyboard-command$$',
+      Space,
+      '$$mdi:backspace-outline$$',
+      {t: '$$mdi:numeric$$', type: held},
+      '$$mdi:volume-high$$',
+      '$$mdi:brightness-5$$',
+      '$$mdi:volume-low$$',
+      '$$mdi:brightness-7$$'
+    ]

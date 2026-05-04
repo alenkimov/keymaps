@@ -75,20 +75,7 @@ default_install_bin_dir() {
 }
 
 default_config_source() {
-  local candidate
-
-  for candidate in \
-    "$SCRIPT_DIR/kanata.kbd" \
-    "$SCRIPT_DIR/v2/kanata.kbd" \
-    "$SCRIPT_DIR/v1/kanata.kbd"
-  do
-    if [[ -f "$candidate" ]]; then
-      printf '%s\n' "$candidate"
-      return
-    fi
-  done
-
-  printf '%s\n' "$SCRIPT_DIR/v2/kanata.kbd"
+  printf '%s\n' "$SCRIPT_DIR/kanata.kbd"
 }
 
 xml_escape() {
@@ -142,7 +129,7 @@ require_command git
 require_command launchctl
 require_command plutil
 
-[[ -f "$CONFIG_SOURCE" ]] || die "config not found: $CONFIG_SOURCE. Keep a layout at MacOS/v2/kanata.kbd or set CONFIG_SOURCE=/path/to/kanata.kbd"
+[[ -f "$CONFIG_SOURCE" ]] || die "config not found: $CONFIG_SOURCE. Keep a layout at MacOS/kanata.kbd or set CONFIG_SOURCE=/path/to/kanata.kbd"
 
 USER_ID="$(id -u)"
 TMP_DIR="$(mktemp -d)"

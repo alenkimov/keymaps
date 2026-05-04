@@ -1,0 +1,118 @@
+(defcfg
+  process-unmapped-keys yes
+)
+
+(defsrc
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft           up
+  fn   lctl lalt lmet spc                 rmet ralt                left down rght
+)
+
+(defalias
+  ;; ru letters
+  й q   ц w   у e   к r   е t   н y   г u   ш i   щ o   з p   х [   ъ ]
+  ф a   ы s   в d   а f   п g   р h   о j   л k   д l   ж ;   э '
+  я z   ч x   с c   м v   и b   т n   ь m   б ,   ю .
+
+  ьъ (tap-dance-eager 400 (
+    @ь
+    (macro bspc @ъ)
+  ))
+
+  ;; language switch
+  us (multi
+    (set-input-source "com.apple.keylayout.US")
+    (layer-switch us)
+  )
+
+  ru (multi
+    (set-input-source "com.apple.keylayout.RussianWin")
+    (layer-switch ru)
+  )
+
+  lang (tap-dance-eager 400 (
+    @us
+    @ru
+  ))
+
+  ;; layers
+  nav (layer-while-held nav)
+  num (layer-while-held num)
+
+  ;; Space tap, Shift hold
+  sftspc (tap-hold 200 200 spc lsft)
+
+  ;; base symbols
+  dot     (unicode U+002E) ;; .
+  comma   (unicode U+002C) ;; ,
+  slash   (fork (unicode U+002F) (unicode U+003F) (lsft rsft)) ;; / / ?
+  pipe    (unicode U+007C) ;; |
+  bslash  (unicode U+005C) ;; \
+  apos    (fork (unicode U+0027) (unicode U+0022) (lsft rsft)) ;; ' / "
+  grave   (unicode U+0060) ;; `
+
+  exclam  (unicode U+0021) ;; !
+  at      (unicode U+0040) ;; @
+  hash    (unicode U+0023) ;; #
+  under   (unicode U+005F) ;; _
+  colon   (fork (unicode U+003A) (unicode U+003B) (lsft rsft)) ;; : / ;
+  amp     (unicode U+0026) ;; &
+  star    (unicode U+002A) ;; *
+  plus    (unicode U+002B) ;; +
+  dash    (tap-dance 300 (
+    (unicode U+002D) ;; -
+    (unicode U+2014) ;; —
+  ))
+  eq      (unicode U+003D) ;; =
+
+  ;; nav layer symbols
+  lbrack  (unicode U+005B) ;; [
+  rbrack  (unicode U+005D) ;; ]
+  lparen  (unicode U+0028) ;; (
+  rparen  (unicode U+0029) ;; )
+  lbrace  (unicode U+007B) ;; {
+  rbrace  (unicode U+007D) ;; }
+  lt      (unicode U+003C) ;; <
+  gt      (unicode U+003E) ;; >
+
+  ;; num layer symbols
+  caret   (unicode U+005E) ;; ^
+  ruble   (unicode U+20BD) ;; ₽
+  dollar  (unicode U+0024) ;; $
+  tilde   (unicode U+007E) ;; ~
+  percent (unicode U+0025) ;; %
+)
+
+(deflayer us
+  @grave  @exclam @at    @hash  @under @colon XX     @amp   @star  @plus  @dash  @eq    XX     @pipe
+  tab     q       w      e      r      t      @apos  y      u      i      o      p      XX     @bslash
+  @dot    a       s      d      f      g      ret    h      j      k      l      XX     XX
+  @comma  z       x      c      v      b      @lang  n      m      XX     XX     @slash volu
+  @nav    lctl    lalt   lmet   @sftspc                            bspc   @num          brdn   vold   brup
+)
+
+(deflayer ru
+  @grave  @exclam @at    @hash  @under @colon XX     @amp   @star  @plus  @dash  @eq    XX     @pipe
+  tab     @й      @ц     @у     @к     @е     @apos  @н     @г     @ш     @щ     @з     @х     @bslash
+  @dot    @ф      @ы     @в     @а     @п     ret    @р     @о     @л     @д     @ж     @э
+  @comma  @я      @ч     @с     @м     @и     @lang  @т     @ьъ    @б     @ю     @slash volu
+  @nav    lctl    lalt   lmet   @sftspc                            bspc   @num          brdn   vold   brup
+)
+
+(deflayer nav
+  @grave  @exclam @at    @hash  @under @colon XX     @amp     @star   @plus  @dash    @eq      XX      @pipe
+  tab     XX      up     XX     XX     XX     @apos  XX       @lbrack @rbrack XX       XX       XX      @bslash
+  @dot    left    down   rght   XX     XX     ret    XX       @lparen @rparen @lbrace  @rbrace  XX
+  @comma  XX      del    XX     XX     XX     @lang  XX       @lt     @gt     XX       @slash   volu
+  @nav    lctl    lalt   lmet   @sftspc                              bspc    @num              brdn    vold    brup
+)
+
+(deflayer num
+  @grave  @exclam @at      @hash  @under @colon XX     @amp   @star  @plus  @dash  @eq    XX     @pipe
+  tab     @caret  7        8      9      @ruble @apos  XX     XX     XX     XX     XX     XX     @bslash
+  @dot    0       4        5      6      @dollar ret   XX     XX     XX     XX     XX     XX
+  @comma  @tilde  1        2      3      @percent @lang XX     XX     XX     XX     @slash volu
+  @nav    lctl    lalt     lmet   @sftspc                            bspc   @num          brdn   vold   brup
+)

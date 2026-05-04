@@ -151,10 +151,9 @@
 
 ## Моя раскладка Mac
 
-![mac keymap v2](MacOS/v2/image.png)
+![mac keymap](MacOS/keymap.png)
 
-Актуальная раскладка для обычной клавиатуры Mac лежит в `MacOS/v2/kanata.kbd`.
-Предыдущая версия сохранена в `MacOS/v1/kanata.kbd`.
+Актуальная раскладка для обычной клавиатуры Mac лежит в `MacOS/kanata.kbd`.
 В конфиге Kanata сама переключает системную раскладку между `US` и `RussianWin`, поэтому обе раскладки должны быть добавлены в macOS.
 
 ### Установка Kanata на macOS
@@ -186,7 +185,7 @@
    ./install-macos-kanata.sh
    ```
 
-   Скрипт по умолчанию берёт `MacOS/v2/kanata.kbd`, собирает мой форк
+   Скрипт по умолчанию берёт `MacOS/kanata.kbd`, собирает мой форк
    Kanata, создаёт `/Applications/Kanata.app`, копирует конфиг в
    `/etc/kanata/kanata.kbd` и настраивает `launchd`: root LaunchDaemon для
    Kanata и пользовательский LaunchAgent для `kanata-input-source-helper`.
@@ -230,7 +229,7 @@ cd MacOS
 
 ```sh
 CONFIG_SOURCE=/path/to/kanata.kbd ./install-macos-kanata.sh
-CONFIG_SOURCE=./v1/kanata.kbd ./install-macos-kanata.sh
+CONFIG_SOURCE=./kanata.kbd ./install-macos-kanata.sh
 KANATA_APP_DIR=/Applications/Kanata-dev.app ./install-macos-kanata.sh
 ```
 
