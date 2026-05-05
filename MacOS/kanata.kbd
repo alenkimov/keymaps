@@ -49,7 +49,7 @@
   comma   (unicode U+002C) ;; ,
   slash   (fork (unicode U+002F) (unicode U+003F) (lsft rsft)) ;; / / ?
   pipe    (unicode U+007C) ;; |
-  bslash  (unicode U+005C) ;; \
+  bslash  (fork (unicode U+005C) (unicode U+007C) (lsft rsft)) ;; \ / |
   apos    (fork (unicode U+0027) (unicode U+0022) (lsft rsft)) ;; ' / "
   grave   (unicode U+0060) ;; `
 
@@ -57,14 +57,12 @@
   at      (unicode U+0040) ;; @
   hash    (unicode U+0023) ;; #
   under   (unicode U+005F) ;; _
-  colon   (fork (unicode U+003A) (unicode U+003B) (lsft rsft)) ;; : / ;
+  colon   (unicode U+003A) ;; :
+  semi    (unicode U+003B) ;; ;
   amp     (unicode U+0026) ;; &
   star    (unicode U+002A) ;; *
-  plus    (unicode U+002B) ;; +
-  dash    (tap-dance 300 (
-    (unicode U+002D) ;; -
-    (unicode U+2014) ;; —
-  ))
+  plus    (fork (unicode U+003D) (unicode U+002B) (lsft rsft)) ;; = / +
+  dash    (fork (unicode U+002D) (unicode U+005F) (lsft rsft)) ;; - / _
   eq      (unicode U+003D) ;; =
 
   ;; nav layer symbols
@@ -86,32 +84,32 @@
 )
 
 (deflayer us
-  @grave  @exclam @at    @hash  @under @colon XX     @amp   @star  @plus  @dash  @eq    XX     @pipe
-  tab     q       w      e      r      t      @apos  y      u      i      o      p      XX     @bslash
+  XX      @exclam @at    @hash  @colon @semi  @grave XX     @amp   @star  @apos  @dash  @plus  XX
+  tab     q       w      e      r      t      @bslash y      u      i      o      p      XX     XX
   @dot    a       s      d      f      g      ret    h      j      k      l      XX     XX
   @comma  z       x      c      v      b      @lang  n      m      XX     XX     @slash volu
   @nav    lctl    lalt   lmet   @sftspc                            bspc   @num          brdn   vold   brup
 )
 
 (deflayer ru
-  @grave  @exclam @at    @hash  @under @colon XX     @amp   @star  @plus  @dash  @eq    XX     @pipe
-  tab     @й      @ц     @у     @к     @е     @apos  @н     @г     @ш     @щ     @з     @х     @bslash
+  XX      @exclam @at    @hash  @colon @semi  @grave XX     @amp   @star  @apos  @dash  @plus  XX
+  tab     @й      @ц     @у     @к     @е     @bslash @н     @г     @ш     @щ     @з     @х     XX
   @dot    @ф      @ы     @в     @а     @п     ret    @р     @о     @л     @д     @ж     @э
   @comma  @я      @ч     @с     @м     @и     @lang  @т     @ьъ    @б     @ю     @slash volu
   @nav    lctl    lalt   lmet   @sftspc                            bspc   @num          brdn   vold   brup
 )
 
 (deflayer nav
-  @grave  @exclam @at    @hash  @under @colon XX     @amp     @star   @plus  @dash    @eq      XX      @pipe
-  tab     XX      up     XX     XX     XX     @apos  XX       @lbrack @rbrack XX       XX       XX      @bslash
+  XX      @exclam @at    @hash  @colon @semi  @grave XX     @amp     @star   @apos  @dash    @plus   XX
+  tab     XX      up     XX     XX     XX     @bslash XX       @lbrack @rbrack XX     XX       XX      XX
   @dot    left    down   rght   XX     XX     ret    XX       @lparen @rparen @lbrace  @rbrace  XX
   @comma  XX      del    XX     XX     XX     @lang  XX       @lt     @gt     XX       @slash   volu
   @nav    lctl    lalt   lmet   @sftspc                              bspc    @num              brdn    vold    brup
 )
 
 (deflayer num
-  @grave  @exclam @at      @hash  @under @colon XX     @amp   @star  @plus  @dash  @eq    XX     @pipe
-  tab     @caret  7        8      9      @ruble @apos  XX     XX     XX     XX     XX     XX     @bslash
+  XX      @exclam @at      @hash  @colon @semi  @grave XX     @amp   @star  @apos  @dash  @plus  XX
+  tab     @caret  7        8      9      @ruble @bslash XX     XX     XX     XX     XX     XX     XX
   @dot    0       4        5      6      @dollar ret   XX     XX     XX     XX     XX     XX
   @comma  @tilde  1        2      3      @percent @lang XX     XX     XX     XX     @slash volu
   @nav    lctl    lalt     lmet   @sftspc                            bspc   @num          brdn   vold   brup
