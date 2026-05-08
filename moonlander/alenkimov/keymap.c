@@ -157,6 +157,36 @@ void set_top_row_color(HSV hsv) {
   }
 }
 
+void set_rgb_with_value(uint8_t index, uint8_t r, uint8_t g, uint8_t b) {
+  float f = (float)rgb_matrix_config.hsv.v / UINT8_MAX;
+  rgb_matrix_set_color(index, f * r, f * g, f * b);
+}
+
+void set_matrix_key_color(uint8_t row, uint8_t col, uint8_t r, uint8_t g, uint8_t b) {
+  uint8_t led = g_led_config.matrix_co[row][col];
+  if (led != NO_LED) {
+    set_rgb_with_value(led, r, g, b);
+  }
+}
+
+void set_matrix_row_color(uint8_t row, uint8_t r, uint8_t g, uint8_t b) {
+  for (uint8_t col = 0; col < MATRIX_COLS; col++) {
+    set_matrix_key_color(row, col, r, g, b);
+  }
+}
+
+void set_russian_flag_color(void) {
+  for (uint8_t row = 0; row < MATRIX_ROWS; row++) {
+    if (row == 0 || row == 6) {
+      set_matrix_row_color(row, 255, 255, 255);
+    } else if (row == 1 || row == 2 || row == 7 || row == 8) {
+      set_matrix_row_color(row, 0, 57, 166);
+    } else if (row == 3 || row == 4 || row == 9 || row == 10) {
+      set_matrix_row_color(row, 213, 43, 30);
+    }
+  }
+}
+
 bool rgb_matrix_indicators_user(void) {
   if (rawhid_state.rgb_control) {
       return false;
@@ -169,7 +199,7 @@ bool rgb_matrix_indicators_user(void) {
         break;
       case _RU:
         set_layer_color(0);
-        set_top_row_color((HSV){ .h = 170, .s = 255, .v = 255 });
+        set_russian_flag_color();
         break;
       case _NUM:
         set_layer_color(1);
