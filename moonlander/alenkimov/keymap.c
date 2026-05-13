@@ -34,6 +34,10 @@ enum custom_keycodes {
   RBRC_KEY,
   LCBR_KEY,
   RCBR_KEY,
+  RUBL_KEY,
+  DLR_KEY,
+  CIRC_KEY,
+  TILD_KEY,
 };
 
 
@@ -71,9 +75,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [_NUM] = LAYOUT_moonlander(
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
-    KC_TRANSPARENT, KC_CIRC,        KC_7,           KC_8,           KC_9,           RU_RUBL,        KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
-    KC_TRANSPARENT, KC_0,           KC_4,           KC_5,           KC_6,           KC_DLR,         KC_TRANSPARENT,                                                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
-    KC_TRANSPARENT, KC_TILD,        KC_1,           KC_2,           KC_3,           KC_PERC,                                        KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
+    KC_TRANSPARENT, CIRC_KEY,       KC_7,           KC_8,           KC_9,           RUBL_KEY,       KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
+    KC_TRANSPARENT, KC_0,           KC_4,           KC_5,           KC_6,           DLR_KEY,        KC_TRANSPARENT,                                                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
+    KC_TRANSPARENT, TILD_KEY,       KC_1,           KC_2,           KC_3,           KC_PERC,                                        KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
     KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT,                                                                                                 KC_TRANSPARENT, KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
   ),
@@ -358,6 +362,28 @@ void tap_us_symbol(uint16_t keycode) {
     send_keyboard_report();
 }
 
+void tap_ru_symbol(uint16_t keycode) {
+    uint8_t mods = get_mods();
+    uint8_t oneshot_mods = get_oneshot_mods();
+    bool ru_base_layer = is_ru_base_layer();
+
+    del_mods(MOD_MASK_SHIFT);
+    del_oneshot_mods(MOD_MASK_SHIFT);
+    send_keyboard_report();
+
+    if (!ru_base_layer) {
+        tap_code16(LALT(LSFT(KC_2)));
+    }
+    tap_code16(keycode);
+    if (!ru_base_layer) {
+        tap_code16(LALT(LSFT(KC_1)));
+    }
+
+    set_mods(mods);
+    set_oneshot_mods(oneshot_mods);
+    send_keyboard_report();
+}
+
 void tap_us_key_preserve_shift(uint16_t keycode) {
     uint8_t mods = get_mods();
     uint8_t oneshot_mods = get_oneshot_mods();
@@ -475,6 +501,26 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case RU_PIPE:
         if (record->event.pressed) {
             tap_us_symbol(KC_PIPE);
+        }
+        return false;
+    case RUBL_KEY:
+        if (record->event.pressed) {
+            tap_ru_symbol(RU_RUBL);
+        }
+        return false;
+    case DLR_KEY:
+        if (record->event.pressed) {
+            tap_us_symbol(KC_DLR);
+        }
+        return false;
+    case CIRC_KEY:
+        if (record->event.pressed) {
+            tap_us_symbol(KC_CIRC);
+        }
+        return false;
+    case TILD_KEY:
+        if (record->event.pressed) {
+            tap_us_symbol(KC_TILD);
         }
         return false;
     case DOT_KEY:
