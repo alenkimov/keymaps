@@ -38,6 +38,7 @@ enum custom_keycodes {
   DLR_KEY,
   CIRC_KEY,
   TILD_KEY,
+  RU_IE_KEY,
 };
 
 
@@ -67,7 +68,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [_RU] = LAYOUT_moonlander(
     KC_ESCAPE,      RU_EXLM,        RU_AT,          RU_HASH,        RU_COLN,        RU_SCLN,        RU_GRAVE,                                       KC_TRANSPARENT, RU_AMPR,        RU_ASTR,        RU_QUOTE,       RU_MINUS,       RU_EQUAL,       KC_MEDIA_PLAY_PAUSE,
-    KC_TAB,         KC_Q,           KC_W,           KC_E,           KC_R,           KC_T,           KC_NO,                                          KC_NO,          KC_Y,           KC_U,           KC_I,           KC_O,           KC_P,           RU_HA,
+    KC_TAB,         KC_Q,           KC_W,           KC_E,           KC_R,           RU_IE_KEY,      KC_NO,                                          KC_NO,          KC_Y,           KC_U,           KC_I,           KC_O,           KC_P,           RU_HA,
     DOT_KEY,        KC_A,           KC_S,           KC_D,           KC_F,           KC_G,           KC_NO,                                                                          KC_NO,          KC_H,           KC_J,           KC_K,           KC_L,           RU_ZHE,         RU_E,
     COMMA_KEY,      KC_Z,           KC_X,           KC_C,           KC_V,           KC_B,                                           KC_N,           TD(DANCE_0),    RU_BE,          RU_YU,          SLASH_KEY,      BSLS_KEY,
     MO(_NAV),       KC_LEFT_GUI,    KC_LEFT_ALT,    TG(_GAME),      MO(_NUM),       KC_ENTER,                                                                                                       TD(DANCE_1),    MO(_FN),        KC_NO,          KC_NO,          KC_NO,          KC_NO,          
@@ -427,6 +428,8 @@ void tap_us_key_preserve_shift(uint16_t keycode) {
     }
 }
 
+static uint16_t ru_ie_timer;
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
 
@@ -536,6 +539,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case TILD_KEY:
         if (record->event.pressed) {
             tap_us_symbol(KC_TILD);
+        }
+        return false;
+    case RU_IE_KEY:
+        if (record->event.pressed) {
+            ru_ie_timer = timer_read();
+        } else {
+            tap_code(timer_elapsed(ru_ie_timer) < TAPPING_TERM ? KC_T : KC_GRAVE);
         }
         return false;
     case DOT_KEY:
