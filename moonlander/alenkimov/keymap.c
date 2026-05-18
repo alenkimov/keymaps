@@ -6,6 +6,10 @@
 #define ZSA_SAFE_RANGE SAFE_RANGE
 #endif
 
+#ifdef AUDIO_ENABLE
+float ru_ie_ready_song[][2] = SONG(E__NOTE(_E6), E__NOTE(_B6));
+#endif
+
 enum custom_keycodes {
   RGB_SLD = ZSA_SAFE_RANGE,
   RU_EXLM,
@@ -428,9 +432,26 @@ void tap_us_key_preserve_shift(uint16_t keycode) {
     }
 }
 
+static bool ru_ie_pressed;
+static bool ru_ie_ready;
 static uint16_t ru_ie_timer;
 
+void matrix_scan_user(void) {
+    if (ru_ie_pressed && !ru_ie_ready && timer_elapsed(ru_ie_timer) >= TAPPING_TERM) {
+        ru_ie_ready = true;
+#ifdef AUDIO_ENABLE
+        PLAY_SONG(ru_ie_ready_song);
+#endif
+    }
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  if (record->event.pressed && ru_ie_pressed && keycode != RU_IE_KEY) {
+      tap_code(ru_ie_ready ? KC_GRAVE : KC_T);
+      ru_ie_pressed = false;
+      ru_ie_ready = false;
+  }
+
   switch (keycode) {
 
     case RGB_SLD:
@@ -543,9 +564,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
     case RU_IE_KEY:
         if (record->event.pressed) {
+            ru_ie_pressed = true;
+            ru_ie_ready = false;
             ru_ie_timer = timer_read();
-        } else {
-            tap_code(timer_elapsed(ru_ie_timer) < TAPPING_TERM ? KC_T : KC_GRAVE);
+        } else if (ru_ie_pressed) {
+            tap_code(ru_ie_ready ? KC_GRAVE : KC_T);
+            ru_ie_pressed = false;
+            ru_ie_ready = false;
         }
         return false;
     case DOT_KEY:
